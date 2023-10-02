@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\structs.cpp" />
+    <ClCompile Include="src\app.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\headers\structs.hpp" />
