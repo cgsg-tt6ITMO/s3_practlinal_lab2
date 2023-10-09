@@ -7,37 +7,22 @@
 
 /* Main function */
 int main() {
-  size_t n = 3;
-
-  double a31[3][3] = {
-   {1,0,0},
-   {4,7,0},
-   {7,8,11}
+  double B[2][2] = {
+    {0, 1 / math::SQRT_PI},
+    {1 / math::SQRT_PI, 0}
   };
 
-  double a32[3][3] = {
-   {1,0,0},
-   {0,1,0},
-   {0,0,1}
-  };
-
-  double a33[2][3] = {
-    {1, 2, 2},
-    {3, 1, 1}
-  };
-
-  double a34[3][2] = {
-    {4, 2},
-    {3, 1},
-    {1, 5}
+  double C[2][2] = {
+    {0, sqrt(6 / math::PI)},
+    {sqrt(6 / math::PI), 0}
   };
 
   matrix
-    m31 = math::matr<3, 3>(a31),
-    m32 = math::matr<3, 3>(a32),
-    m1 = math::invert(&m31);
+    m_b = math::matr<2, 2>(B),
+    m_c = math::matr<2, 2>(C),
+    m1 = math::get_matrix(m_b, m_c);
 
-  math::print_matrix(&m1);
+  math::matr_print(&m1);
 
   return 0;
 }

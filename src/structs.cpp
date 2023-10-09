@@ -26,7 +26,7 @@ double** math::allocate_memory(size_t n, size_t m) {
  *       matrix *m.
  *   Returns: none.
  */
-void math::print_matrix(matrix* m) {
+void math::matr_print(matrix* m) {
   for (size_t i = 0; i < m->n; i++) {
     for (size_t j = 0; j < m->m; j++) {
       std::cout << (m->arr)[i][j] << " ";
@@ -131,7 +131,7 @@ matrix math::num_mul_matr(double c, matrix A) {
  *   Returns:
  *     (matrix) - transposed matrix.
  */
-matrix math::transpose(matrix m) {
+matrix math::matr_transpose(matrix m) {
   double** res = allocate_memory(m.m, m.n);
   for (size_t i = 0; i < m.m; i++) {
     for (size_t j = 0; j < m.n; j++) {
@@ -150,7 +150,7 @@ matrix math::transpose(matrix m) {
  *   Returns:
  *     (matrix) - minor matrix (n-1)x(m-1)
  */
-matrix math::minor(matrix* M, size_t x, size_t y) {
+matrix math::matr_minor(matrix* M, size_t x, size_t y) {
   size_t n = M->n, m = M->m;
   double** a = M->arr;
   double** res = allocate_memory(n - 1, m - 1);
@@ -178,19 +178,20 @@ matrix math::minor(matrix* M, size_t x, size_t y) {
  *   Returns:
  *     (double) - the determinant.
  */
-double math::det(matrix* M) {
+double math::determinant(matrix* M) {
   size_t n = M->n;
   if (n != M->m) {
-    std::cout << "This matrix is not squared, determinant cannot be calculated." << std::endl;
+    std::cout << "This matrix is not squared, determinant cannot be calculated."
+      << std::endl;
   }
   double** a = M->arr;
   if (M->n == 1) return a[0][0];
   if (M->n == 2) return a[0][0] * a[1][1] - a[0][1] * a[1][0];
 
-  int64_t res = 0, coef = 1;
+  double res = 0, coef = 1;
   for (size_t i = 0; i < n; i++) {
-    matrix cur_minor = minor(M, 0, i);
-    res += coef * a[0][i] * det(&cur_minor);
+    matrix cur_minor = matr_minor(M, 0, i);
+    res += coef * a[0][i] * determinant(&cur_minor);
     coef *= -1;
   }
   return res;
@@ -203,7 +204,7 @@ double math::det(matrix* M) {
  *   Returns:
  *     (matrix) - the inverted matrix.
  */
-matrix math::invert(matrix* M) {
+matrix math::matr_invert(matrix* M) {
   size_t n = M->n, m = M->m;
   if (n != m) {
     std::cout << "This matrix cannot be inverted." << std::endl;
@@ -218,13 +219,25 @@ matrix math::invert(matrix* M) {
         coef = -1;
       }
       else coef = 1;
-      matrix minorr = minor(M, i, j);
-      arr[i][j] = det(&minorr) * coef;
+      matrix minorr = matr_minor(M, i, j);
+      arr[i][j] = determinant(&minorr) * coef;
     }
   }
   // transpose
-  matrix res = transpose(matrix{ n, m, arr });
+  matrix res = matr_transpose(matrix{ n, m, arr });
   // multiply to inv to det
-  return num_mul_matr(1.0 / det(M), res);
+  return num_mul_matr(1.0 / determinant(M), res);
 }
 
+/* There is an equation A * B = C. Get matrix A.
+ *   Arguments:
+ *     - matrix B:
+ *       matrix B,
+ *     - matrix C:
+ *       matrix C.
+ *   Returns:
+ *     (matrix) - matrix A.
+ */
+matrix math::get_matrix(matrix B, matrix C) {
+  return matr_mul_matr(C, matr_invert(&B));
+}

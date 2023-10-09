@@ -11,6 +11,8 @@
 /* Namespace for math */
 namespace math {
 
+  const double PI = 3.14159265359, SQRT_PI = sqrt(PI);
+
   struct matrix {
     size_t n, m;
     double** arr;
@@ -58,7 +60,7 @@ namespace math {
    *       matrix *m.
    *   Returns: none.
    */
-  void print_matrix(matrix* m);
+  void matr_print(matrix* m);
 
   /* Multiplies two matrices. Validates sizes.
    *   Arguments:
@@ -102,7 +104,7 @@ namespace math {
    *   Returns:
    *     (matrix) - transposed matrix.
    */
-  matrix transpose(matrix m);
+  matrix matr_transpose(matrix m);
 
   /* Calculates minor of the matrix.
    *   Arguments:
@@ -113,7 +115,7 @@ namespace math {
    *   Returns:
    *     (matrix) - minor matrix (n-1)x(m-1)
    */
-  matrix minor(matrix* M, size_t x, size_t y);
+  matrix matr_minor(matrix* M, size_t x, size_t y);
 
   /* Calculates the determinant.
    *   Arguments:
@@ -122,7 +124,7 @@ namespace math {
    *   Returns:
    *     (double) - the determinant.
    */
-  double det(matrix* M);
+  double determinant(matrix* M);
 
   /* Calculates inverted matrix.
    *   Arguments:
@@ -131,5 +133,16 @@ namespace math {
    *   Returns:
    *     (matrix) - the inverted matrix.
    */
-  matrix invert(matrix* M);
+  matrix matr_invert(matrix* M);
+
+  /* There is an equation A * B = C. Get matrix A.
+   *   Arguments:
+   *     - matrix B:
+   *       matrix B,
+   *     - matrix C:
+   *       matrix C.
+   *   Returns:
+   *     (matrix) - matrix A.
+   */
+  matrix get_matrix(matrix B, matrix C);
 }
