@@ -13,7 +13,7 @@ namespace math {
 
   struct matrix {
     size_t n, m;
-    int64_t** arr;
+    double** arr;
   };
 }
 
@@ -26,9 +26,9 @@ namespace math {
    *     - sizes of 2D array:
    *       size_t n, size_t m.
    *   Returns:
-   *     (int64_t**) - array with allocated memory.
+   *     (double**) - array with allocated memory.
    */
-  int64_t** allocate_memory(size_t n, size_t m);
+  double** allocate_memory(size_t n, size_t m);
 
   /* Initializes matrix in a shorter way.
    *   Template parameters:
@@ -36,13 +36,13 @@ namespace math {
    *       size_t n, size_t m.
    *   Arguments:
    *     - array to be wrapped in matrix:
-   *       size_t arr[n][m].
+   *       double arr[n][m].
    *   Returns:
    *     (matrix) - matrix nxm.
    */
   template<size_t n, size_t m>
-  matrix matr(size_t arr[n][m]) {
-    int64_t** res = allocate_memory(n, m);
+  matrix matr(double arr[n][m]) {
+    double** res = allocate_memory(n, m);
     for (size_t i = 0; i < n; i++) {
       for (size_t j = 0; j < m; j++) {
         res[i][j] = arr[i][j];
@@ -87,11 +87,49 @@ namespace math {
   /* Multiplies matrix by number.
    *   Arguments:
    *     - number:
-   *       int64_t c,
+   *       double c,
    *     - matrix:
    *       matrix A.
    *   Returns:
    *     (matrix) - result of multiplication.
    */
-  matrix num_mul_matr(int64_t c, matrix A);
+  matrix num_mul_matr(double c, matrix A);
+
+  /* Transposes the matrix.
+   *   Arguments:
+   *     - the matrix:
+   *       matrix m.
+   *   Returns:
+   *     (matrix) - transposed matrix.
+   */
+  matrix transpose(matrix m);
+
+  /* Calculates minor of the matrix.
+   *   Arguments:
+   *     - pointer to the matrix nxm:
+   *       matrix* M.
+   *     - indexes of row and column to be deleted:
+   *       size_t x, size_t y.
+   *   Returns:
+   *     (matrix) - minor matrix (n-1)x(m-1)
+   */
+  matrix minor(matrix* M, size_t x, size_t y);
+
+  /* Calculates the determinant.
+   *   Arguments:
+   *     - pointer to the matrix:
+   *       matrix *M.
+   *   Returns:
+   *     (double) - the determinant.
+   */
+  double det(matrix* M);
+
+  /* Calculates inverted matrix.
+   *   Arguments:
+   *     - pointer to matrix to be inverted:
+   *       matrix* M.
+   *   Returns:
+   *     (matrix) - the inverted matrix.
+   */
+  matrix invert(matrix* M);
 }
