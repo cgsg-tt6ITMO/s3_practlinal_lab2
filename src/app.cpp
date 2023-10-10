@@ -8,13 +8,13 @@
 /* Main function */
 int main() {
   double B[2][2] = {
-    {0, 1 / math::SQRT_PI},
-    {1 / math::SQRT_PI, 0}
+    {2, -1},
+    {1, 2}
   };
 
   double C[2][2] = {
-    {0, sqrt(6 / math::PI)},
-    {sqrt(6 / math::PI), 0}
+    {-2, -1.5},
+    {-1, 3}
   };
 
   matrix
@@ -23,6 +23,6 @@ int main() {
     m1 = math::get_matrix(m_b, m_c);
 
   math::matr_print(&m1);
-
+  math::matr_from_file();
   return 0;
 }

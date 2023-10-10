@@ -241,3 +241,20 @@ matrix math::matr_invert(matrix* M) {
 matrix math::get_matrix(matrix B, matrix C) {
   return matr_mul_matr(C, matr_invert(&B));
 }
+
+/* Get matrix from file.
+ */
+matrix math::matr_from_file() {
+  // Create a text string, which is used to output the text file
+  std::string myText;
+  // Read from the text file
+  std::ifstream MyReadFile("src/files/a.txt");
+  // Use a while loop together with the getline() function to read the file line by line
+  while (std::getline(MyReadFile, myText)) {
+    // Output the text from the file
+    std::cout << myText << std::endl;
+  }
+  // Close the file
+  MyReadFile.close();
+  return matrix{ 0, 0, NULL };
+}

@@ -7,6 +7,9 @@
 
 #include <iostream>
 #include <stdlib.h>   // malloc
+#include <fstream>    // files
+#include <sstream>    // getline
+#include <string>
 
 /* Namespace for math */
 namespace math {
@@ -145,4 +148,6 @@ namespace math {
    *     (matrix) - matrix A.
    */
   matrix get_matrix(matrix B, matrix C);
+
+  matrix matr_from_file();
 }
