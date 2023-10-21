@@ -123,7 +123,8 @@ def rotate90(x, y):
     Y = m[1][0]*x + m[1][1]*y
     return [X,Y]
 """
-
+# 14-16
+"""
 def countPoint(m, x, y):
     X = m[0][0]*x + m[0][1]*y
     Y = m[1][0]*x + m[1][1]*y
@@ -169,13 +170,50 @@ m1 = [[0, -1],[1, 0]]
 m2=[[0,1],[1,0]]
 m3=[[-1,0],[0,1]]
 m4=[[1,0],[0,-1]]
+sqpi = math.sqrt(math.pi)
+sq6 = math.sqrt(6)
+#M = [[9/sqpi, 0],[0, sqpi]]
+M = [[sq6, 0],[0,sq6]]
+was = [[[0, 1/sqpi, 0, -1/sqpi,0],[1/sqpi, 0, -1/sqpi, 0,1/sqpi]]]
 
 res = []
-for i in tref:
-    #plt.plot(i[0],i[1])
-    res.append(getRes(i, m4))
+for i in was:
+    plt.plot(i[0],i[1])
+    res.append(getRes(i, M))
 
 for i in res:
     plt.plot(i[0],i[1])
 
 plt.show()
+"""
+# 6
+
+def countPoint(m, x, y):
+    X = m[0][0]*x + m[0][1]*y
+    Y = m[1][0]*x + m[1][1]*y
+    return [X,Y]
+
+def getRes(frame, m):
+    frameresX = []
+    frameresY = [] 
+    for i in range(len(frame[0])):
+        tmp = countPoint(m, frame[0][i], frame[1][i])
+        frameresX.append(tmp[0])
+        frameresY.append(tmp[1])
+    return [frameresX, frameresY]
+
+#M = [[1, 1/3],[2,1]]
+M=[[-1,5/6],[0,1]]
+was = [[[0,0,-1,1,3,2,2,0],
+       [-3,1,1,3,1,1,-3,-3]]]
+
+res = []
+for i in was:
+    plt.plot(i[0],i[1])
+    res.append(getRes(i, M))
+
+for i in res:
+    plt.plot(i[0],i[1])
+
+plt.show()
+
