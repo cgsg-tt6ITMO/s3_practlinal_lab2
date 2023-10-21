@@ -101,7 +101,7 @@ plt.plot(ar1, ar2)
 
 plt.show()
 """
-
+"""
 def rotate60(x, y):
     s = math.sqrt(3)/2
     m = [[0.5, -s],[s,0.5]]
@@ -122,12 +122,18 @@ def rotate90(x, y):
     X = m[0][0]*x + m[0][1]*y
     Y = m[1][0]*x + m[1][1]*y
     return [X,Y]
+"""
 
-def getRes(frame):
+def countPoint(m, x, y):
+    X = m[0][0]*x + m[0][1]*y
+    Y = m[1][0]*x + m[1][1]*y
+    return [X,Y]
+
+def getRes(frame, m):
     frameresX = []
     frameresY = [] 
     for i in range(len(frame[0])):
-        tmp = rotate90(frame[0][i], frame[1][i])
+        tmp = countPoint(m, frame[0][i], frame[1][i])
         frameresX.append(tmp[0])
         frameresY.append(tmp[1])
     return [frameresX, frameresY]
@@ -151,12 +157,25 @@ mouth=[[-2,-1,1,2],[-3,-3.5,-3.5,-3]]
 
 skull = [frame, rightEye, leftEye, rightNose, leftNose, mouth]
 
-res = []
-for i in skull:
-    plt.plot(i[0],i[1])
-    res.append(getRes(i))
+tref=[
+    [[0,1,2,3,3.5,3,2,1,0],[0,1,1.5,1,0,-1,-1.5,-1,0]],
+    [[0,-1,-2,-3,-3.5,-3,-2,-1,0],[0,1,1.5,1,0,-1,-1.5,-1,0]],
+    [[0, 0.5, 1.5, -1.5,-0.5,0],[0,-1.5,-2.5,-2.5,-1.5,0]],
+    [[0, 1, 1.5, 1, 0, -1, -1.5, -1, 0],
+     [0,1.5,2.5,3.5,4,3.5,2.5,1.5,0]]
+    ]
 
-#for i in res:
+m1 = [[0, -1],[1, 0]]
+m2=[[0,1],[1,0]]
+m3=[[-1,0],[0,1]]
+m4=[[1,0],[0,-1]]
+
+res = []
+for i in tref:
     #plt.plot(i[0],i[1])
+    res.append(getRes(i, m4))
+
+for i in res:
+    plt.plot(i[0],i[1])
 
 plt.show()
