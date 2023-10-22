@@ -7,14 +7,14 @@
 
 /* Main function */
 int main() {
-  double B[2][2] = {
-    {1, 2},
-    {0, 1}
+  double C[2][2] = {
+    {2, 0},
+    {0, 6}
   };
 
-  double C[2][2] = {
-    {0, 1},
-    {1, 2}
+  double B[2][2] = {
+    {2, 2},
+    {4, 6}
   };
 
   matrix
